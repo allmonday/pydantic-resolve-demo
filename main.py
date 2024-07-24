@@ -1,9 +1,9 @@
 from __future__ import annotations
 from typing import Optional
+from fastapi.routing import APIRoute
 from fastapi import FastAPI
 from pydantic import BaseModel
 from pydantic_resolve import Resolver, build_list, build_object, LoaderDepend
-
 
 async def blog_to_comments_loader(blog_ids: list[int]):
     print(blog_ids)
@@ -69,9 +69,12 @@ class MyBlogSite(BaseModel):
         return sum([b.comment_count for b in self.blogs])
 
 
-app = FastAPI()
+def custom_generate_unique_id(route: APIRoute):
+    return f"{route.name}"
 
-@app.get("/my-site/{name}", response_model=MyBlogSite)
+app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
+
+@app.get("/my-site/{name}", response_model=MyBlogSite, tags=["main"])
 async def read_my_site(name: str):
     site = MyBlogSite(name=name)
     return await Resolver().resolve(site)

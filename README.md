@@ -7,7 +7,7 @@ pip install -r requirement.pip
 fastapi dev main.py
 ```
 
-visit http://localhost:8000/docs#/default/read_my_site_my_site_get
+visit http://localhost:8000/docs#/main/read_my_site
 
 
 ## fe

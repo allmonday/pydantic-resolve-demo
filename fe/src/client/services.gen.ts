@@ -3,22 +3,27 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { ReadMySiteMySiteNameGetData, ReadMySiteMySiteNameGetResponse } from './types.gen';
+import type { ReadMySiteData, ReadMySiteResponse } from './types.gen';
 
-/**
- * Read My Site
- * @param data The data for the request.
- * @param data.name
- * @returns MyBlogSite Successful Response
- * @throws ApiError
- */
-export const readMySiteMySiteNameGet = (data: ReadMySiteMySiteNameGetData): CancelablePromise<ReadMySiteMySiteNameGetResponse> => { return __request(OpenAPI, {
-    method: 'GET',
-    url: '/my-site/{name}',
-    path: {
-        name: data.name
-    },
-    errors: {
-        422: 'Validation Error'
+export class MainService {
+    /**
+     * Read My Site
+     * @param data The data for the request.
+     * @param data.name
+     * @returns MyBlogSite Successful Response
+     * @throws ApiError
+     */
+    public static readMySite(data: ReadMySiteData): CancelablePromise<ReadMySiteResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/my-site/{name}',
+            path: {
+                name: data.name
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
     }
-}); };
+    
+}

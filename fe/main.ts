@@ -1,11 +1,11 @@
-import { readMySiteMySiteNameGet } from './src/client'
+import { MainService } from './src/client'
 
-type MySite = Awaited<ReturnType<typeof readMySiteMySiteNameGet>>
-type Param = Parameters<typeof readMySiteMySiteNameGet>
+type MySite = Awaited<ReturnType<typeof MainService.readMySite>>
+type Param = Parameters<typeof MainService.readMySite>
 
 
 (async () => {
     const name: Param[0]['name'] = 'tangkikodo'
-    const data: MySite = await readMySiteMySiteNameGet({ name: name })
+    const data: MySite = await MainService.readMySite({ name: name })
     console.log(JSON.stringify(data, null, 2))
 })()

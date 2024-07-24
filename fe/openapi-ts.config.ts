@@ -5,4 +5,7 @@ export default defineConfig({
     client: 'axios',
     input: 'http://127.0.0.1:8000/openapi.json',
     output: 'src/client',
+    services: {
+        asClass: true
+    }
 });

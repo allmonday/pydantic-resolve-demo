@@ -34,16 +34,16 @@ export type ValidationError = {
     type: string;
 };
 
-export type ReadMySiteMySiteNameGetData = {
+export type ReadMySiteData = {
     name: string;
 };
 
-export type ReadMySiteMySiteNameGetResponse = MyBlogSite;
+export type ReadMySiteResponse = MyBlogSite;
 
 export type $OpenApiTs = {
     '/my-site/{name}': {
         get: {
-            req: ReadMySiteMySiteNameGetData;
+            req: ReadMySiteData;
             res: {
                 /**
                  * Successful Response
