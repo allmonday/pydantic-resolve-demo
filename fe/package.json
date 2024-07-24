@@ -1,0 +1,17 @@
+{
+  "name": "fe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "openapi-ts": "openapi-ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.50.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
