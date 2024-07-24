@@ -12,7 +12,7 @@ visit http://localhost:8000/docs#/main/read_my_site
 
 ## fe
 
-ensure server is running
+ensure server is running, and then generate the client from `localhost:8000/openapi.json`
 ```shell
 cd fe
 npm install
