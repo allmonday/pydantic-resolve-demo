@@ -7,5 +7,5 @@ export default defineConfig({
     output: 'src/client',
     services: {
         asClass: true
-    }
+    },
 });
