@@ -39,6 +39,10 @@ class MyComment(Comment):
 
 ```
 
+We only need to make sure the return value from `resolve_blogs` or `resolve_comments` can be converted to BASE schemas (Blog, Comment)
+
+then we can replace `blogs: list[Blog] = []` to `blogs: list[MyBlog] = []` to extend more fields.
+
 ## BE
 
 ```shell
