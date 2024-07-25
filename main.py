@@ -38,6 +38,7 @@ class Comment(BaseModel):
 class Blog(BaseModel):
     id: int
     title: str
+    user_id: int
 
 class User(BaseModel):
     id: int
@@ -56,7 +57,7 @@ class MyBlog(Blog):
 class MyComment(Comment):
     user: Optional[User] = None
     def resolve_user(self, loader=LoaderDepend(user_loader)):
-        return loader.load(self.id)
+        return loader.load(self.user_id)
 
 class MyBlogSite(BaseModel):
     name: str
