@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from pydantic_resolve import Resolver, build_list, build_object, LoaderDepend
 
+# 1. loader functions
 async def blog_to_comments_loader(blog_ids: list[int]):
     print(blog_ids)
     comments_table = [
@@ -45,6 +46,16 @@ class User(BaseModel):
     name: str
 
 # 2. inherit and extend from base schemas
+class MyBlogSite(BaseModel):
+    name: str
+    blogs: list[MyBlog] = []
+    async def resolve_blogs(self):
+        return await get_blogs()
+
+    comment_count: int = 0
+    def post_comment_count(self):
+        return sum([b.comment_count for b in self.blogs])
+
 class MyBlog(Blog):
     comments: list[MyComment] = []
     def resolve_comments(self, loader=LoaderDepend(blog_to_comments_loader)):
@@ -59,15 +70,6 @@ class MyComment(Comment):
     def resolve_user(self, loader=LoaderDepend(user_loader)):
         return loader.load(self.user_id)
 
-class MyBlogSite(BaseModel):
-    name: str
-    blogs: list[MyBlog] = []
-    async def resolve_blogs(self):
-        return await get_blogs()
-
-    comment_count: int = 0
-    def post_comment_count(self):
-        return sum([b.comment_count for b in self.blogs])
 
 
 def custom_generate_unique_id(route: APIRoute):
