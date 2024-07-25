@@ -1,5 +1,7 @@
 # pydantic-resolve-demo
 
+For FastAPI user, we already have pydantic, openapi support and openapi-ts, pydantic-resolve is the last puzzle for a better development pattern.
+
 - https://github.com/allmonday/pydantic-resolve
 - https://github.com/allmonday/pydantic2-resolve
 
