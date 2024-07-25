@@ -1,4 +1,8 @@
 # pydantic-resolve-demo
+
+- https://github.com/allmonday/pydantic-resolve
+- https://github.com/allmonday/pydantic2-resolve
+
 This repo shows how we define and compose schemas together with pydantic-resolve and sync schemas/methods to frontend with openapi-ts.
 
 ![](./demo.png)
