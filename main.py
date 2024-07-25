@@ -35,11 +35,11 @@ async def get_blogs():
 class Comment(BaseModel):
     id: int
     content: str
+    user_id: int
 
 class Blog(BaseModel):
     id: int
     title: str
-    user_id: int
 
 class User(BaseModel):
     id: int
@@ -69,7 +69,6 @@ class MyComment(Comment):
     user: Optional[User] = None
     def resolve_user(self, loader=LoaderDepend(user_loader)):
         return loader.load(self.user_id)
-
 
 
 def custom_generate_unique_id(route: APIRoute):

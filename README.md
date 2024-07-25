@@ -6,6 +6,7 @@ This repo shows how we define and compose schemas together with pydantic-resolve
 ```python
 class MyBlogSite(BaseModel):
     name: str
+    # blogs: list[Blog] = []  # this will not include comments and comment_count
     blogs: list[MyBlog] = []
     async def resolve_blogs(self):
         return await get_blogs()
@@ -15,6 +16,7 @@ class MyBlogSite(BaseModel):
         return sum([b.comment_count for b in self.blogs])
         
 class MyBlog(Blog):
+    # comments: list[Comment] = []  # this will not include user field
     comments: list[MyComment] = []
     def resolve_comments(self, loader=LoaderDepend(blog_to_comments_loader)):
         return loader.load(self.id)
@@ -30,7 +32,7 @@ class MyComment(Comment):
 
 ```
 
-## be
+## BE
 
 ```shell
 pip install -r requirement.pip
@@ -47,7 +49,7 @@ async def read_my_site(name: str):
 visit http://localhost:8000/docs#/main/read_my_site
 
 
-## fe
+## FE
 
 ensure server is running, and then generate the client from `localhost:8000/openapi.json`
 ```shell

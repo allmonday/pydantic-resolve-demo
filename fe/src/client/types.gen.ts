@@ -20,6 +20,7 @@ export type MyBlogSite = {
 export type MyComment = {
     id: number;
     content: string;
+    user_id: number;
     user?: User | null;
 };
 

@@ -78,6 +78,10 @@ export const $MyComment = {
             type: 'string',
             title: 'Content'
         },
+        user_id: {
+            type: 'integer',
+            title: 'User Id'
+        },
         user: {
             anyOf: [
                 {
@@ -90,7 +94,7 @@ export const $MyComment = {
         }
     },
     type: 'object',
-    required: ['id', 'content'],
+    required: ['id', 'content', 'user_id'],
     title: 'MyComment'
 } as const;
 
