@@ -3,9 +3,9 @@
 - https://github.com/allmonday/pydantic-resolve
 - https://github.com/allmonday/pydantic2-resolve
 
-This repo shows how we define and compose schemas together with pydantic-resolve and sync schemas/methods to frontend with openapi-ts.
+This repo shows how can we define and compose schemas together with pydantic-resolve, and sync schemas/methods to frontend with openapi-ts.
 
-> GraphQL(dataloader and resolver) at backend schema and REST at API.
+> kind of like GraphQL(dataloader and resolver) at backend schema and REST/openapi.json at API.
 
 
 ![](./demo.png)
