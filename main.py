@@ -20,7 +20,7 @@ async def user_loader(user_ids: list[int]):
     print(user_ids)
     users = [
         dict(id=1, name='alice'),
-        dict(id=1, name='john'),
+        dict(id=2, name='john'),
     ]
     return build_object(users, user_ids, lambda c: c['id'])
 
