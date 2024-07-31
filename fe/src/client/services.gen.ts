@@ -3,20 +3,60 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { ReadMySiteData, ReadMySiteResponse } from './types.gen';
+import type { ReadMySite1Data, ReadMySite1Response, ReadMySite2Data, ReadMySite2Response, ReadMySite3Data, ReadMySite3Response } from './types.gen';
 
 export class MainService {
     /**
-     * Read My Site
+     * Read My Site 1
      * @param data The data for the request.
      * @param data.name
-     * @returns MyBlogSite Successful Response
+     * @returns MyBlogSite1 Successful Response
      * @throws ApiError
      */
-    public static readMySite(data: ReadMySiteData): CancelablePromise<ReadMySiteResponse> {
+    public static readMySite1(data: ReadMySite1Data): CancelablePromise<ReadMySite1Response> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/my-site/{name}',
+            url: '/my-site-1/{name}',
+            path: {
+                name: data.name
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read My Site 2
+     * @param data The data for the request.
+     * @param data.name
+     * @returns MyBlogSite2 Successful Response
+     * @throws ApiError
+     */
+    public static readMySite2(data: ReadMySite2Data): CancelablePromise<ReadMySite2Response> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/my-site-2/{name}',
+            path: {
+                name: data.name
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Read My Site 3
+     * @param data The data for the request.
+     * @param data.name
+     * @returns MyBlogSite3 Successful Response
+     * @throws ApiError
+     */
+    public static readMySite3(data: ReadMySite3Data): CancelablePromise<ReadMySite3Response> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/my-site-3/{name}',
             path: {
                 name: data.name
             },

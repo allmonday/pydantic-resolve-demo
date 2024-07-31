@@ -106,6 +106,6 @@ class MyComment3(Comment):
 
 
 @app.get("/my-site-3/{name}", response_model=MyBlogSite3, tags=["main"])
-async def read_my_site(name: str):
+async def read_my_site_3(name: str):
     site = MyBlogSite3(name=name)
     return await Resolver().resolve(site)
