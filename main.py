@@ -5,6 +5,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from pydantic_resolve import Resolver, build_list, build_object, LoaderDepend
 
+
+# 0. init app
+def custom_generate_unique_id(route: APIRoute):
+    return f"{route.name}"
+
+app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
+
 # 1. loader functions
 async def blog_to_comments_loader(blog_ids: list[int]):
     print(blog_ids)
@@ -30,8 +37,7 @@ async def get_blogs():
         dict(id=2, title='what is composition oriented development pattarn'),
     ]
 
-
-# 1. define base schemas
+# 1. define base schemas, dict returned from loader can be automatically converted to pydantic schema
 class Comment(BaseModel):
     id: int
     content: str
@@ -45,38 +51,61 @@ class User(BaseModel):
     id: int
     name: str
 
-# 2. inherit and extend from base schemas
-class MyBlogSite(BaseModel):
+
+# 2. inherit and extend from base schemas, progressively extend fields, from simple to complex
+
+# ---------------- sample 1 --------------------
+class MyBlogSite1(BaseModel):
     name: str
-    blogs: list[MyBlog] = []
+    blogs: list[Blog] = []
     async def resolve_blogs(self):
         return await get_blogs()
 
-    comment_count: int = 0
-    def post_comment_count(self):
-        return sum([b.comment_count for b in self.blogs])
+@app.get("/my-site-1/{name}", response_model=MyBlogSite1, tags=["main"])
+async def read_my_site_1(name: str):
+    site = MyBlogSite1(name=name)
+    return await Resolver().resolve(site)
 
-class MyBlog(Blog):
-    comments: list[MyComment] = []
+
+# ---------------- sample 2 --------------------
+class MyBlog2(Blog):
+    comments: list[Comment] = []
     def resolve_comments(self, loader=LoaderDepend(blog_to_comments_loader)):
         return loader.load(self.id)
 
-    comment_count: int = 0
-    def post_comment_count(self):
-        return len(self.comments)
+class MyBlogSite2(BaseModel):
+    name: str
+    blogs: list[MyBlog2] = []
+    async def resolve_blogs(self):
+        return await get_blogs()
 
-class MyComment(Comment):
+
+@app.get("/my-site-2/{name}", response_model=MyBlogSite2, tags=["main"])
+async def read_my_site_2(name: str):
+    site = MyBlogSite2(name=name)
+    return await Resolver().resolve(site)
+    
+
+# ---------------- sample 3 --------------------
+class MyBlogSite3(BaseModel):
+    name: str
+    blogs: list[MyBlog3] = []
+    async def resolve_blogs(self):
+        return await get_blogs()
+
+class MyBlog3(Blog):
+    comments: list[MyComment3] = []
+    def resolve_comments(self, loader=LoaderDepend(blog_to_comments_loader)):
+        return loader.load(self.id)
+
+
+class MyComment3(Comment):
     user: Optional[User] = None
     def resolve_user(self, loader=LoaderDepend(user_loader)):
         return loader.load(self.user_id)
 
 
-def custom_generate_unique_id(route: APIRoute):
-    return f"{route.name}"
-
-app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
-
-@app.get("/my-site/{name}", response_model=MyBlogSite, tags=["main"])
+@app.get("/my-site-3/{name}", response_model=MyBlogSite3, tags=["main"])
 async def read_my_site(name: str):
-    site = MyBlogSite(name=name)
+    site = MyBlogSite3(name=name)
     return await Resolver().resolve(site)
