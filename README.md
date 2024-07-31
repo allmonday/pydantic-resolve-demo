@@ -10,7 +10,7 @@ This repo shows how can we define and compose schemas together with pydantic-res
 > kind of like GraphQL(dataloader and resolver) at backend schema and REST/openapi.json at API.
 
 
-![](./sample.jpeg)
+![](./sample.jpg)
 
 ```python
 class MyBlogSite(BaseModel):
