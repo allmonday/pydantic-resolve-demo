@@ -2,13 +2,15 @@
 
 For FastAPI user, we already have pydantic, openapi support and openapi-ts, pydantic-resolve is the last puzzle for a better development pattern.
 
+pydantic-resolve 
 - https://github.com/allmonday/pydantic-resolve
 - https://github.com/allmonday/pydantic2-resolve
 
-This repo shows how can we define and compose schemas together with pydantic-resolve, and sync schemas/methods to frontend with openapi-ts.
+This repo shows how to define and compose schemas together with pydantic-resolve, and also sync schemas and methods to frontend with openapi-ts.
 
-> kind of like GraphQL(dataloader and resolver) at backend schema and REST/openapi.json at API.
-
+- sample 1: show blogs
+- sample 2: show blogs with comments
+- sample 2: show author info of comments
 
 ![](./sample.jpg)
 
