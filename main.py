@@ -61,7 +61,7 @@ class MyBlogSite1(BaseModel):
     async def resolve_blogs(self):
         return await get_blogs()
 
-@app.get("/my-site-1/{name}", response_model=MyBlogSite1, tags=["main"])
+@app.get("/my-site-1/{name}", response_model=MyBlogSite1, tags=["module_a"])
 async def read_my_site_1(name: str):
     site = MyBlogSite1(name=name)
     return await Resolver().resolve(site)
@@ -80,7 +80,7 @@ class MyBlogSite2(BaseModel):
         return await get_blogs()
 
 
-@app.get("/my-site-2/{name}", response_model=MyBlogSite2, tags=["main"])
+@app.get("/my-site-2/{name}", response_model=MyBlogSite2, tags=["module_b"])
 async def read_my_site_2(name: str):
     site = MyBlogSite2(name=name)
     return await Resolver().resolve(site)
@@ -105,7 +105,7 @@ class MyComment3(Comment):
         return loader.load(self.user_id)
 
 
-@app.get("/my-site-3/{name}", response_model=MyBlogSite3, tags=["main"])
+@app.get("/my-site-3/{name}", response_model=MyBlogSite3, tags=["module_c"])
 async def read_my_site_3(name: str):
     site = MyBlogSite3(name=name)
     return await Resolver().resolve(site)

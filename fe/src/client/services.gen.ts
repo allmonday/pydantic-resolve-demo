@@ -5,7 +5,7 @@ import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
 import type { ReadMySite1Data, ReadMySite1Response, ReadMySite2Data, ReadMySite2Response, ReadMySite3Data, ReadMySite3Response } from './types.gen';
 
-export class MainService {
+export class ModuleAService {
     /**
      * Read My Site 1
      * @param data The data for the request.
@@ -26,6 +26,9 @@ export class MainService {
         });
     }
     
+}
+
+export class ModuleBService {
     /**
      * Read My Site 2
      * @param data The data for the request.
@@ -46,6 +49,9 @@ export class MainService {
         });
     }
     
+}
+
+export class ModuleCService {
     /**
      * Read My Site 3
      * @param data The data for the request.
