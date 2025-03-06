@@ -1,2 +1,3 @@
 fastapi[standard]
-pydantic2-resolve
+pydantic-resolve==1.11.3
+pydantic

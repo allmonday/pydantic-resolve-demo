@@ -2,9 +2,7 @@
 
 For FastAPI user, we already have pydantic, openapi support and openapi-ts, pydantic-resolve is the last puzzle for a better development pattern.
 
-pydantic-resolve 
-- https://github.com/allmonday/pydantic-resolve
-- https://github.com/allmonday/pydantic2-resolve
+pydantic-resolve: https://github.com/allmonday/pydantic-resolve
 
 This repo shows how to define and compose schemas together with pydantic-resolve, and also sync schemas and methods to frontend with openapi-ts.
 
@@ -25,7 +23,7 @@ class MyBlogSite(BaseModel):
     comment_count: int = 0
     def post_comment_count(self):
         return sum([b.comment_count for b in self.blogs])
-        
+
 class MyBlog(Blog):
     # comments: list[Comment] = []  # this will not include user field
     comments: list[MyComment] = []
@@ -49,7 +47,11 @@ then we can replace `blogs: list[Blog] = []` to `blogs: list[MyBlog] = []` to ex
 
 ## BE
 
+prefer python >= 3.10
+
 ```shell
+python -m venv venv
+source venv/bin/activate
 pip install -r requirement.pip
 fastapi dev main.py
 ```
@@ -63,10 +65,10 @@ async def read_my_site(name: str):
 
 visit http://localhost:8000/docs#/main/read_my_site
 
-
 ## FE
 
 ensure server is running, and then generate the client from `localhost:8000/openapi.json`
+
 ```shell
 cd fe
 npm install
