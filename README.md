@@ -77,11 +77,14 @@ npx ts-node main.ts
 ```
 
 ```ts
-mport { MainService } from './src/client'
+import { MainService } from './src/client'
 
-type MySite = Awaited<ReturnType<typeof MainService.readMySite>>
-type Param = Parameters<typeof MainService.readMySite>[0]
+// whti this can avoid the impact of renaming schema name
+type AsyncReturnType<T extends (...args: any) => any> = Awaited<ReturnType<T>>;
 
+type ReadMySite1 = typeof ModuleAService.readMySite1;
+type MySite1 = AsyncReturnType<ReadMySite1>;
+type Param1 = Parameters<ReadMySite1>[0];
 
 (async () => {
     const name: Param['name'] = 'tangkikodo'

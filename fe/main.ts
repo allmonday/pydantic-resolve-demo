@@ -1,13 +1,18 @@
 import { ModuleAService, ModuleBService, ModuleCService } from "./src/client";
 
-type MySite1 = Awaited<ReturnType<typeof ModuleAService.readMySite1>>;
-type Param1 = Parameters<typeof ModuleAService.readMySite1>[0];
+type AsyncReturnType<T extends (...args: any) => any> = Awaited<ReturnType<T>>;
 
-type MySite2 = Awaited<ReturnType<typeof ModuleBService.readMySite2>>;
-type Param2 = Parameters<typeof ModuleBService.readMySite2>[0];
+type ReadMySite1 = typeof ModuleAService.readMySite1;
+type MySite1 = AsyncReturnType<ReadMySite1>;
+type Param1 = Parameters<ReadMySite1>[0];
 
-type MySite3 = Awaited<ReturnType<typeof ModuleCService.readMySite3>>;
-type Param3 = Parameters<typeof ModuleCService.readMySite3>[0];
+type ReadMySite2 = typeof ModuleBService.readMySite2;
+type MySite2 = AsyncReturnType<ReadMySite2>;
+type Param2 = Parameters<ReadMySite2>[0];
+
+type ReadMySite3 = typeof ModuleCService.readMySite3;
+type MySite3 = AsyncReturnType<ReadMySite3>;
+type Param3 = Parameters<ReadMySite3>[0];
 
 (async () => {
   const site1 = async () => {
