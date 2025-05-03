@@ -6,6 +6,10 @@ pydantic-resolve: https://github.com/allmonday/pydantic-resolve
 
 This repo shows how to define and compose schemas together with pydantic-resolve, and also sync schemas and methods to frontend with openapi-ts.
 
+Based on the business model, there are three basic entities: Blog, Comment, User
+
+after that, we can easily build new complicated model by inheriting and extending
+
 - sample 1: show blogs
 - sample 2: show blogs with comments
 - sample 2: show author info of comments
