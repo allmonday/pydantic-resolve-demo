@@ -12,7 +12,9 @@ after that, we can easily build new complicated model by inheriting and extendin
 
 - sample 1: show blogs
 - sample 2: show blogs with comments
-- sample 2: show author info of comments
+- sample 3: show author info of comments
+
+from 1 to 3, you will progressively add more and more fields into the response model, and the client side can sense it immediately.
 
 ![](./sample.jpg)
 
